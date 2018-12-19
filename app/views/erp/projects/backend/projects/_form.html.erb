@@ -1,0 +1,138 @@
+<%= form_for([erp_projects, :backend, project], html: {multipart: true}) do |f| %>
+    <div class="form-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="portlet light bordered">
+                    <div class="portlet-body form">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <%= erp_form_control('image', {
+                                    img_src: project.image.system,
+                                    name: 'project[image]',
+                                    width: 110,
+                                    height: 110
+                                }) %>
+                            </div>
+                            <div class="col-md-8">
+                                <%= erp_form_control("text", {
+                                    name: 'project[name]',
+                                    value: project.name,
+                                    label: "#{t('.name')} (image-size:960x600px)",
+                                    placeholder: t('.placeholder_name')
+                                }) %>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <%= erp_form_control('date', {
+                                            label: t('.start_date'),
+                                            name: 'project[start_date]',
+                                            value: project.start_date,
+                                            placeholder: t('.choose_start_date'),
+                                            required: true,
+                                            errors: project.errors.full_messages_for(:start_date)
+                                        }) %>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <%= erp_form_control('date', {
+                                            label: t('.completion_date'),
+                                            name: 'project[completion_date]',
+                                            value: project.completion_date,
+                                            placeholder: t('.choose_completion_date'),
+                                            required: true,
+                                            errors: project.errors.full_messages_for(:completion_date)
+                                        }) %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="portlet light bordered">
+                    <div class="portlet-body form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <%= erp_form_control("dataselect", {
+                                    name: 'project[category_id]',
+                                    value: project.category_id,
+                                    text: project.category_name,
+                                    placeholder: t('.choose_category'),
+                                    label: t('.category'),
+                                    url: erp_projects.dataselect_backend_categories_path(format: 'json'),
+                                    required: true,
+                                    errors: project.errors.full_messages_for(:category_id)
+                                }) %>
+                            </div>
+                            <div class="col-md-6">
+                                <%= erp_form_control("text", {
+                                    name: '',
+                                    value: '',
+                                    label: 'Khách hàng',
+                                    placeholder: 'Chọn khách hàng',
+                                }) %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <%= erp_form_control("text", {
+                                    name: 'project[location]',
+                                    value: project.location,
+                                    label: t('.location'),
+                                    placeholder: t('.placeholder_location'),
+                                }) %>
+                            </div>
+                            <div class="col-md-6">
+                                <%= erp_form_control("text", {
+                                    name: 'project[area]',
+                                    value: project.area,
+                                    label: t('.area'),
+                                    help: t('.help_area'),
+                                    placeholder: t('.placeholder_area'),
+                                }) %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-body form">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <%= erp_form_control("editor", {
+                                    name: 'project[description]',
+                                    value: project.description,
+                                    label: t('.description'),
+                                }) %> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+                    <div class="portlet-body form">
+                        <%= erp_form_control("addableform", {
+                            add_button: t('.add_image'),
+                            partial: 'erp/projects/backend/project_images/form_line',
+                            partial_url: erp_projects.form_line_backend_project_images_path,
+                            items: @project.project_images,
+                            item: :project_image
+                        }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%= erp_component('button/save', {
+        text: t('submit')
+    }) %>
+    <%= erp_component('button/cancel', {
+        text: t('cancel'),
+        href: erp_projects.backend_projects_path
+    }) %>
+<% end %>

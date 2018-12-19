@@ -1,0 +1,109 @@
+<table class="table table-advance table-hover table-striped table-checkable order-column">
+    <thead>
+        <tr>
+            <th width='1%'>
+                <%= erp_datalist_check_all %>
+            </th>
+            <% if get_columns(params).include?("name") %>
+                <th class="sortable" sort-by='erp_projects_categories.name'>
+                    <%= t('.name') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("parent") %>
+                <th>
+                    <%= t('.parent') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("description") %>
+                <th>
+                    <%= t('.description') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("status") %>
+                <th>
+                    <%= t('status') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("creator") %>
+                <th>
+                    <%= t('creator') %>
+                </th>
+            <% end %>
+            <% if get_columns(params).include?("created_at") %>
+                <th class="sortable" sort-by='erp_projects_categories.created_at'>
+                    <%= t('created_at') %>
+                </th>
+            <% end %>
+            <th width="7%" class="sortable text-nowrap" sort-by='erp_projects_categories.custom_order'>
+                <%= t('custom_order') %>
+            </th>
+            <th width="7%"><%= t('actions') %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @categories.each do |category| %>
+            <tr class="odd gradeX">
+                <td>
+                    <%= erp_datalist_check_row(id: category.id) %>
+                </td>
+                <% if get_columns(params).include?("name") %>
+                    <td><%= category.full_name %></td>
+                <% end %>
+                <% if get_columns(params).include?("parent") %>
+                    <td><%= category.parent_name %></td>
+                <% end %>
+                <% if get_columns(params).include?("description") %>
+                    <td><%= category.description %></td>
+                <% end %>
+                <% if get_columns(params).include?("status") %>
+                <td>
+                    
+                </td>
+                <% end %>
+                <% if get_columns(params).include?("creator") %>
+                    <td>
+                        <%= erp_component('avatar', {
+                            user: category.creator
+                        }) %>
+                    </td>
+                <% end %>
+                <% if get_columns(params).include?("created_at") %>
+                    <td><%= category.created_at.strftime("%d/%m/%Y") %></td>
+                <% end %>
+                <td class="text-center text-semibold">
+                    <%= erp_datalist_order_column({
+                        item: category,
+                        move_up_url: erp_projects.move_up_backend_categories_path(id: category),
+                        move_down_url: erp_projects.move_down_backend_categories_path(id: category),
+                        sort_by: 'erp_projects_categories.custom_order'
+                    }) %>
+                </td>
+                <td class="text-right">
+                    <%= erp_datalist_row_actions(
+                        [
+                            {
+                                text: '<i class="fa fa-edit"></i> '+t('edit'),
+                                href: erp_projects.edit_backend_category_path(category)
+                            },
+                            {
+                                divider: true
+                            },
+                            {
+                                text: '<i class="fa fa-trash"></i> '+t('.delete'),
+                                url: erp_projects.backend_category_path(category),
+                                data_method: 'DELETE',
+                                class: 'ajax-link',
+                                data_confirm: t('delete_confirm')
+                            }
+                        ]
+                    ) %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<% if @categories.empty? %>
+    <div class="datalist-empty-line"><%= t('.no_matching_records_found') %></div>
+<% end %>
+        
+<%= erp_datalist_pagination(@categories) %>

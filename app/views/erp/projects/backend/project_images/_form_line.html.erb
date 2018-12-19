@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-md-2">
+        <label></label>
+    </div>
+    <div class="col-md-4">
+        <label><%= t('.image_name') %></label>
+    </div>
+    <div class="col-md-4">
+        <label><%= t('.note') %></label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <input type="hidden" name="project[project_images_attributes][<%= uid %>][id]" value="<%= project_image.id %>">
+        <input type="hidden" name="project[project_images_attributes][<%= uid %>][_destroy]" value="">
+        <%= erp_form_control('image', {
+            img_src: project_image.image_url.system,
+            name: 'project[project_images_attributes][' + uid + '][image_url]',
+            width: 50,
+            height: 50
+        }) %>
+    </div>
+    <div class="col-md-4">
+        <%= erp_form_control("text", {
+            name: 'project[project_images_attributes][' + uid + '][name]',
+            value: project_image.name,
+            text: project_image.name,
+            placeholder: t('.placeholder_image_name')
+        }) %>
+    </div>
+    <div class="col-md-4">
+        <%= erp_form_control("textarea", {
+            name: 'project[project_images_attributes][' + uid + '][note]',
+            value: '',
+            text: '',
+            placeholder: t('.placeholder_note'),
+            rows: 1
+        }) %>
+    </div>
+    <div class="col-md-2">        
+        <%= erp_form_control("addableform_remove_button", {
+            is_nested_form: true
+        }) %>
+    </div>
+</div>

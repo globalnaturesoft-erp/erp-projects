@@ -1,0 +1,63 @@
+<% content_for :title do %>
+    <%= t('.projects') %>
+<% end %>
+
+<% content_for :page_title do %>
+    <i class="fa fa-picture-o"></i> <%= t('.projects') %>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <%= erp_component('button/create', {
+        text: t('.create'),
+        href: erp_projects.new_backend_project_path,
+        class: 'btn-noborder'
+    }) %>
+<% end %>
+
+<% content_for :global_filter do %>
+    <div class="row top-datalist">
+        <div class="col-md-3">
+            <%= erp_form_control("dataselect", {
+                name: 'category_id',
+                label: 'Chuyên mục',
+                placeholder: 'Tìm theo chuyên mục',
+                url: erp_projects.dataselect_backend_categories_path(format: 'json'),
+            }) %>
+        </div>
+    </div>
+<% end %>
+
+<%= erp_datalist(
+    url: erp_projects.list_backend_projects_path,
+    keyword: true,
+    filters: [
+        
+    ],
+    columns: [
+        {
+            text: t('.name'), name: 'name', value: true, checked: true
+        },
+        {
+            text: t('.location'), name: 'location', value: true, checked: true
+        },
+        {
+            text: t('.category'), name: 'category', value: true, checked: true
+        },
+        {
+            text: t('.start_date'), name: 'start_date', value: true, checked: true
+        },
+        {
+            text: t('.completion_date'), name: 'completion_date', value: true, checked: true
+        },
+        {
+            text: t('status'), name: 'status', value: true, checked: true
+        },
+        {
+            text: t('creator'), name: 'creator', value: true, checked: false
+        },
+        {
+            text: t('created_at'), name: 'created_at', value: true, checked: false
+        }
+    ],
+    sort: { sort_by: 'erp_projects_projects.created_at', sort_direction: 'desc' }
+) %>

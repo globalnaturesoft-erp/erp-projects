@@ -1,0 +1,33 @@
+<% content_for :title do %>
+    <%= @category.name %>
+<% end %>
+
+<% content_for :page_title do %>    
+    <a href="<%= erp_projects.backend_categories_path %>">
+    <i class="fa fa-folder"></i> <%= t('.categories') %>
+    </a> / <%= @category.name %>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <%= erp_component('button/create', {
+        text: t('.create'),
+        href: erp_projects.new_backend_category_path,
+        class: 'btn-noborder'
+    }) %>
+<% end %>
+
+<div class="row">
+    <div class="col-md-6">
+        <% if @category.errors.any? %>
+            <%= erp_form_control("form_error_message") %>
+        <% end %>
+        
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-body">
+                <%= render 'form', category: @category %>
+            </div>
+        </div>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+</div>

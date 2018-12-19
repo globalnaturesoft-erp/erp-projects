@@ -1,0 +1,29 @@
+<% content_for :title do %>
+    <%= @project.name %>
+<% end %>
+
+<% content_for :page_title do %>    
+    <a href="<%= erp_projects.backend_projects_path %>">
+    <i class="fa fa-folder"></i> <%= t('.projects') %>
+    </a> / <%= @project.name %>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <%= erp_component('button/create', {
+        text: t('.create'),
+        href: erp_projects.new_backend_project_path,
+        class: 'btn-noborder'
+    }) %>
+<% end %>
+
+<div class="row">
+    <div class="col-md-12">
+        <% if @project.errors.any? %>
+            <%= erp_form_control("form_error_message") %>
+        <% end %>
+        
+        <!-- BEGIN SAMPLE FORM PORTLET-->
+        <%= render 'form', project: @project %>
+        <!-- END SAMPLE FORM PORTLET-->
+    </div>
+</div>

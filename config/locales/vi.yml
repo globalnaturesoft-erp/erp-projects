@@ -1,0 +1,91 @@
+vi:
+  erp:
+    projects:
+      backend:
+        categories:
+          create:
+            success: "Chuyên mục đã được tạo thành công."
+          update:
+            success: "Chuyên mục đã được cập nhật thành công."
+          destroy:
+            success: "Xóa chuyên mục thành công."
+          index:
+            categories: "Chuyên mục dự án"
+            create: "Thêm mới"
+            active: "Đang kích hoạt"
+            deleted: "Đã bị hủy"
+            name: "Tên chuyên mục"
+            parent: "Chuyên mục cha"
+            description: "Mô tả"
+          list:
+            name: "Tên chuyên mục"
+            parent: "Chuyên mục cha"
+            description: "Mô tả"
+            order: "Sắp xếp"
+            no_matching_records_found: "Không tìm thấy kết quả"
+            delete: "Xóa chuyên mục"
+          new:
+            categories: "Chuyên mục dự án"
+            create: "Thêm mới"
+          edit:
+            categories: "Chuyên mục dự án"
+            create: "Thêm mới"
+          form:
+            name: "Tên chuyên mục"
+            placeholder_name: "Nhập tên chuyên mục"
+            parent_category: "Chuyên mục cha"
+            placeholder_parent_category: "Lựa chọn chuyên mục"
+            description: "Mô tả"
+            placeholder_description: "Nhập thông tin mô tả"
+        projects:
+          create:
+            success: "Thêm dự án mới thành công."
+          update:
+            success: "Cập nhật dự án thành công."
+          destroy:
+            success: "Xóa dự án thành công."
+          index:
+            projects: "Dự án"
+            create: "Thêm dự án"
+            name: "Tên dự án"
+            location: "Vị trí"
+            category: "Ch.mục/Phân loại"
+            start_date: "Ngày bắt đầu"
+            completion_date: "Ngày hoàn thành"
+          list:
+            name: "Tên dự án"
+            location: "Vị trí"
+            category: "Ch.mục/Phân loại"
+            start_date: "Ngày bắt đầu"
+            completion_date: "Ngày hoàn thành"
+            delete: "Xóa dự án"
+            no_matching_records_found: "Không tìm thấy kết quả"
+          new:
+            projects: "Dự án"
+            create: "Thêm dự án"
+          edit:
+            projects: "Dự án"
+            create: "Thêm dự án"
+          form:
+            name: "Tên dự án"
+            placeholder_name: "Nhập tên của dự án"
+            start_date: "Ngày bắt đầu"
+            choose_start_date: "Chọn ngày bắt đầu dự án"
+            completion_date: "Ngày hoàn thành"
+            choose_completion_date: "Chọn ngày hoàn thành dự án"
+            category: "Chuyên mục/Phân loại"
+            choose_category: "Chọn chuyên mục cho dự án"
+            location: "Vị trí"
+            placeholder_location: "Nhập địa điểm, vị trí của dự án"
+            area: "Diện tích"
+            help_area: "Đơn vị tính bằng mét vuông (500 mét vuông thì nhập 500)"
+            placeholder_area: "Nhập diện tích"
+            description: "Mô tả chi tiết"
+            add_image: "Thêm hình ảnh"
+        project_images:
+          form_line:
+            image_url: "Ảnh/URL"
+            image_name: "Tên ảnh"
+            placeholder_image_name: "Nhập tên cho ảnh"
+            note: "Ghi chú"
+            placeholder_note: "Nhập ghi chú..."

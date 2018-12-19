@@ -1,0 +1,69 @@
+<% content_for :title do %>
+    <%= t('.categories') %>
+<% end %>
+
+<% content_for :page_title do %>
+    <i class="fa fa-folder"></i> <%= t('.categories') %>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <%= erp_component('button/create', {
+        text: t('.create'),
+        href: erp_projects.new_backend_category_path,
+        class: 'btn-noborder'
+    }) %>
+<% end %>
+
+<% content_for :global_filter do %>
+    <div class="row">
+        <div class="col-md-3">
+            
+        </div>
+    </div>
+<% end %>
+
+<%= erp_datalist(
+    url: erp_projects.list_backend_categories_path,
+    keywords: [
+        {
+            text: t('.name'), name: 'erp_projects_categories.name'
+        },
+        {
+            text: t('.parent_category'),
+            name: 'parents_erp_projects_categories.name',
+            select: {
+                name: 'parents_erp_projects_categories.id',
+                data_url: erp_projects.dataselect_backend_categories_path
+            }
+        }
+    ],
+    filters: [
+        {
+            text: t('.active'), name: 'erp_projects_categories.status', value: 'active', checked: true
+        },
+        {
+            text: t('.deleted'), name: 'erp_projects_categories.status', value: 'deleted', checked: false
+        },
+    ],
+    columns: [
+        {
+            text: t('.name'), name: 'name', value: true, checked: true
+        },
+        {
+            text: t('.parent'), name: 'parent', value: true, checked: false
+        },
+        {
+            text: t('.description'), name: 'description', value: true, checked: true
+        },
+        {
+            text: t('status'), name: 'status', value: true, checked: true
+        },
+        {
+            text: t('creator'), name: 'creator', value: true, checked: false
+        },
+        {
+            text: t('created_at'), name: 'created_at', value: true, checked: false
+        }
+    ],
+    sort: { sort_by: 'erp_projects_categories.created_at', sort_direction: 'desc' }
+) %>

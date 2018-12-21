@@ -62,7 +62,7 @@ module Erp
       end
       
       version :thumb_960_600 do
-				process :resize_and_pad => [960, 600, "#FFFFFF", "Center"] # resize_to_fill => [960, 600]
+				process resize_to_fill: [960, 600]
 			end
     end
   end

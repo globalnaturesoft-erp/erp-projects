@@ -6,7 +6,7 @@
         <label><%= t('.image_name') %></label>
     </div>
     <div class="col-md-4">
-        <label><%= t('.note') %></label>
+        <label><%= t('.image_en_name') %></label>
     </div>
 </div>
 <div class="row">
@@ -29,12 +29,11 @@
         }) %>
     </div>
     <div class="col-md-4">
-        <%= erp_form_control("textarea", {
-            name: 'project[project_images_attributes][' + uid + '][note]',
-            value: '',
-            text: '',
-            placeholder: t('.placeholder_note'),
-            rows: 1
+        <%= erp_form_control("text", {
+            name: 'project[project_images_attributes][' + uid + '][en_name]',
+            value: project_image.en_name,
+            text: project_image.en_name,
+            placeholder: t('.placeholder_image_en_name')
         }) %>
     </div>
     <div class="col-md-2">        

@@ -39,9 +39,9 @@ module Erp
 
       # Add a white list of extensions which are allowed to be uploaded.
       # For images you might use something like this:
-      # def extension_white_list
-      #   %w(jpg jpeg gif png)
-      # end
+      def extension_white_list
+        %w(jpg jpeg gif png)
+      end
 
       # Override the filename of the uploaded files:
       # Avoid using model.id or version_name here, see uploader/store.rb for details.
@@ -51,21 +51,32 @@ module Erp
 
       # For backend list			
 			version :system do
+        process resize_with_animate: [150, 150]
         process resize_to_fill: [150, 150]
       end
       
       version :small do
+        process resize_with_animate: [70, 70]
         process resize_to_fill: [70, 70]
       end
       
       version :thumb_640_467 do
+        process resize_with_animate: [640, 467]
         process resize_to_fill: [640, 467]
       end
       
-			# thumbnails
-			#version :thumb75 do
-			#	process :resize_and_pad => [75, 75, "#FFFFFF", "Center"] # resize_to_fill => [75, 75]
-			#end
+      def resize_with_animate(width,height)
+        manipulate! do |img|
+          if img[:format].downcase == 'gif'
+            #coalesce animated gifs before resize.
+            img.coalesce
+          end
+          img.resize "#{width}x#{height}>"
+          img = yield(img) if block_given?
+          img
+        end
+      end
+      
     end
   end
 end
